@@ -8,13 +8,17 @@ function M.on_save(command)
 		group = M.group,
 		pattern = { "*.dot", "*.gv" },
 		callback = function()
-			vim.system(command, { stdin = true }, function(out)
-				if out.stderr ~= "" then
-					vim.notify(out.stderr, vim.log.levels.ERROR)
-				else
-					vim.notify("Graph exported", vim.log.levels.INFO)
-				end
-			end)
+			vim.system(
+				command,
+				{ stdin = true },
+				vim.schedule_wrap(function(out)
+					if out.stderr ~= "" then
+						vim.notify(out.stderr, vim.log.levels.ERROR)
+					else
+						vim.notify("Graph exported", vim.log.levels.INFO)
+					end
+				end)
+			)
 		end,
 		desc = "Auto dot command on save",
 	})
@@ -32,14 +36,18 @@ end
 ---@param command table dot command to export diagram
 function M.export(command)
 	if command[1] == "dot" then
-		vim.system(command, { stdin = true, text = true }, function(out)
-			if out.stderr ~= "" then
-				vim.notify(out.stderr, vim.log.levels.ERROR)
-			else
-				vim.notify("Graph exported", vim.log.levels.INFO)
-			end
-			vim.ui.open(command[#command])
-		end)
+		vim.system(
+			command,
+			{ stdin = true, text = true },
+			vim.schedule_wrap(function(out)
+				if out.stderr ~= "" then
+					vim.notify(out.stderr, vim.log.levels.ERROR)
+				else
+					vim.notify("Graph exported", vim.log.levels.INFO)
+				end
+				vim.ui.open(command[#command])
+			end)
+		)
 	end
 end
 
