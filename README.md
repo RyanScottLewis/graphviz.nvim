@@ -17,7 +17,7 @@ A very simple wrapper for [graphviz](https://graphviz.org/).
 }
 ```
 
-# Configuration
+## Configuration
 
 ```lua
 require("graphviz").setup({
