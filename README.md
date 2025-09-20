@@ -12,7 +12,7 @@ A very simple wrapper for [graphviz](https://graphviz.org/).
 ```lua
 {
     "izocha/graphviz.nvim",
-    ft = {"dot"},
+    ft = { "dot" },
     config = true
 }
 ```
@@ -31,7 +31,7 @@ require("graphviz").setup({
 > [!NOTE]
 > Unfortunately, this plugin only works with the `dot` command.
 
-The plugin has two only commands which are only available to files with the **.dot** and **.gv** file extensions.  
+The plugin has only two commands which are only available to files with the **.dot** and **.gv** file extensions.  
 `Graphviz.nvim` uses `vim.notify` for error notifications on export.
 
 - `GraphExport` can accept 1 argument for the format, but if no argument is provided, it will use the default **setup** value.
